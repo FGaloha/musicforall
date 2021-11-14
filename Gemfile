@@ -57,3 +57,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Front
 gem 'simple_form'
+
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'

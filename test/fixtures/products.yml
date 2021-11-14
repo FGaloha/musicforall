@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  category: MyString
+  description: MyText
+  manufacture_year: 1
+  condition: MyString
+  brand: MyString
+  day_price: 1.5
+  user: one
+
+two:
+  name: MyString
+  category: MyString
+  description: MyText
+  manufacture_year: 1
+  condition: MyString
+  brand: MyString
+  day_price: 1.5
+  user: two

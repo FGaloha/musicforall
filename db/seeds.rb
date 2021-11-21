@@ -5,3 +5,26 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require "open-uri"
+require "yaml"
+
+file = "https://gist.githubusercontent.com/juliends/461638c32c56b8ae117a2f2b8839b0d3/raw/3df2086cf31d0d020eb8fcf0d239fc121fff1dc3/imdb.yml"
+sample = YAML.load(open(file).read)
+
+puts 'Creating singers...'
+directors = {}  # slug => Singer
+sample["directors"].each do |singer|
+  directors[singer["slug"]] = Singer.create! singer.slice("first_name", "last_name")
+end
+
+puts 'Creating albums...'
+sample["movies"].each do |album|
+  Album.create! album.slice("title", "year", "synopsis").merge(singer: directors[album["director_slug"]])
+end
+
+puts 'Creating awards...'
+sample["series"].each do |award|
+  Award.create! award
+end
+puts 'Finished!'

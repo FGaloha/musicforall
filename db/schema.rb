@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_211911) do
+ActiveRecord::Schema.define(version: 2021_11_21_172412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", force: :cascade do |t|
+    t.string "title"
+    t.integer "year"
+    t.text "synopsis"
+    t.bigint "singer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["singer_id"], name: "index_albums_on_singer_id"
+  end
+
+  create_table "awards", force: :cascade do |t|
+    t.string "title"
+    t.integer "year"
+    t.text "synopsis"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -48,6 +66,13 @@ ActiveRecord::Schema.define(version: 2021_11_14_211911) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "singers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -62,6 +87,7 @@ ActiveRecord::Schema.define(version: 2021_11_14_211911) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "albums", "singers"
   add_foreign_key "products", "users"
   add_foreign_key "rents", "reviews"
   add_foreign_key "rents", "users"
